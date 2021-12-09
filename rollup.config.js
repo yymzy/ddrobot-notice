@@ -24,7 +24,7 @@ export default {
     file: pkg.main,
     name: pkg.name,
   },
-  external: ["miniprogram-ci", "path", "tty", "os"],
+  external: ["path", "tty", "os"],
   plugins: [
     resolve(),
     common(),
@@ -32,7 +32,6 @@ export default {
     alias({
       core: "./src/core",
       command: "./src/core/command",
-      utils: "./src/utils",
       types: "./src/types",
     }),
     autoExternal(),
