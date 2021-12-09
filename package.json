@@ -1,6 +1,6 @@
 {
   "name": "ddrobot-notice",
-  "version": "0.0.2-alpha.2",
+  "version": "0.0.2-alpha.3",
   "main": "dist/ddrobot-notice.js",
   "types": "dist/types/index.d.ts",
   "bin": {
