@@ -1,6 +1,6 @@
 {
   "name": "ddrobot-notice",
-  "version": "0.0.2-alpha.3",
+  "version": "1.0.0",
   "main": "dist/ddrobot-notice.js",
   "types": "dist/types/index.d.ts",
   "bin": {
@@ -38,8 +38,10 @@
     "*.{md}": "yarn prettier"
   },
   "dependencies": {
+    "chalk": "^4.1.0",
     "dingtalk-robot-sdk": "^1.1.0",
-    "minimist": "^1.2.5"
+    "minimist": "^1.2.5",
+    "moment": "^2.29.1"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.1",

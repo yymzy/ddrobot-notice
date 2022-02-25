@@ -1,5 +1,29 @@
 import Robot from "dingtalk-robot-sdk";
 import path from "path";
+import chalk from "chalk";
+import { getVersionInfo } from "utils";
+
+/**
+ * 
+ * @description 获取配置
+ * @returns 
+ */
+function getConfig() {
+    const releaseFileName = 'release.json'
+    let config = require(path.resolve(`./package.json`));
+    try {
+        const release = require(path.resolve(`./${releaseFileName}`));
+        if (Array.isArray(release)) {
+            config = {
+                ...config,
+                ...getVersionInfo(release)
+            }
+        }
+    } catch (error) {
+        console.log(chalk.yellow(`请在根目录配置：${releaseFileName}文件`));
+    }
+    return config;
+}
 
 /**
  * 
@@ -11,7 +35,7 @@ async function notice() {
     if (!stage || !dd_access_token || !dd_secret) {
         return;
     }
-    const config = require(path.resolve(`./package.json`));
+    const config = getConfig();
     // 钉钉机器人群通知
     const ddrobot = new Robot({
         // @ts-ignore
