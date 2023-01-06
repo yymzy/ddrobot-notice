@@ -20,7 +20,7 @@ export default {
   output: {
     banner,
     format: "cjs",
-    sourcemap: true,
+    sourcemap: process.env.NODE_ENV !== "production",
     file: pkg.main,
     name: pkg.name,
   },

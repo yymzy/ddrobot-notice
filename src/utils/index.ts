@@ -1,4 +1,4 @@
-import moment from "moment";
+import dayjs from "dayjs";
 const TS_REG = /^[0-9]{8}$/;
 
 interface VersionInfo {
@@ -24,7 +24,7 @@ export const getVersionInfo = (list: string[]): VersionInfo => {
                 topList.push(ts);
                 description = topList.join("-");
             }
-            ts = moment().format("YYYYMMDD");
+            ts = dayjs().format("YYYYMMDD");
         }
         return {
             ts,

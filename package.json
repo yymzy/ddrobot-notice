@@ -1,6 +1,6 @@
 {
   "name": "ddrobot-notice",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "dist/ddrobot-notice.js",
   "types": "dist/types/index.d.ts",
   "bin": {
@@ -18,7 +18,8 @@
   "scripts": {
     "pre-build": "rimraf dist",
     "dev": "yarn pre-build && rollup -c -w",
-    "build": "yarn pre-build && tsc -m commonjs && rollup -c",
+    "build": "yarn pre-build && NODE_ENV=production rollup -c",
+    "build:c": "npm run build && tsc -m commonjs",
     "release": "node scripts/release",
     "lint": "eslint src/**/*.ts --max-warnings 0",
     "prettier": "prettier src/**/*.ts --write",
@@ -39,9 +40,9 @@
   },
   "dependencies": {
     "chalk": "^4.1.0",
+    "dayjs": "^1.11.7",
     "dingtalk-robot-sdk": "^1.1.0",
-    "minimist": "^1.2.5",
-    "moment": "^2.29.1"
+    "minimist": "^1.2.5"
   },
   "devDependencies": {
     "@rollup/plugin-alias": "^3.1.1",

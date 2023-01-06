@@ -1,3 +1,5 @@
+# [1.1.0](https://new.github.com/yymzy/ddrobot-notice/compare/v1.0.0...v1.1.0) (2023-01-06)
+
 # [1.0.0](https://new.github.com/yymzy/ddrobot-notice/compare/v0.0.2-alpha.3...v1.0.0) (2022-02-25)
 
 # [1.0.0](https://new.github.com/yymzy/ddrobot-notice/compare/v0.0.2-alpha.3...v1.0.0) (2022-02-25)
