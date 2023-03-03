@@ -80,7 +80,7 @@ async function notice() {
         .setTitle(markdownTitle)
         .add(`[${markdownTitle}](${config.git || ""})\n`)
         .add(`1. version：${config.version}`)
-        .add(`2. description：{config.description}`)
+        .add(`2. description：${config.description}`)
     if (message) {
         content.add(`> git：${message}`);
     }
