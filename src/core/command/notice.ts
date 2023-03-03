@@ -2,6 +2,7 @@ import Robot from "dingtalk-robot-sender";
 import path from "path";
 import chalk from "chalk";
 import { getVersionInfo } from "utils";
+import dayjs from "dayjs";
 
 function Markdown() {
     this.text = '';
@@ -71,13 +72,15 @@ async function notice() {
         deploy_rc: '灰度',
     };
 
-    const markdownTitle = `${config.name}`.toUpperCase() + '：' + stageMap[stage];
+    const label = stageMap[stage];
+    const date = `-${dayjs().format('YYYY/MM/DD HH:mm:ss')}`;
+    const markdownTitle = `${config.name}`.toUpperCase() + `：${label + date}`;
     // @ts-ignore
     const content = new Markdown()
         .setTitle(markdownTitle)
         .add(`[${markdownTitle}](${config.git || ""})\n`)
         .add(`1. version：${config.version}`)
-        .add(`2. description：${config.description}`)
+        .add(`2. description：{config.description}`)
     if (message) {
         content.add(`> git：${message}`);
     }
