@@ -1,7 +1,26 @@
-import Robot from "dingtalk-robot-sdk";
+import Robot from "dingtalk-robot-sender";
 import path from "path";
 import chalk from "chalk";
 import { getVersionInfo } from "utils";
+
+function Markdown() {
+    this.text = '';
+    this.title = '';
+    this.items = [];
+    this.setTitle = function (title) {
+        this.title = title;
+        return this;
+    }
+    this.add = function (text) {
+        if (Array.isArray(text)) {
+            this.items.concat(text);
+        } else {
+            this.items.push(text);
+        }
+        this.text = this.items.join('\n');
+        return this;
+    }
+}
 
 /**
  * 
@@ -31,32 +50,41 @@ function getConfig() {
  */
 async function notice() {
     // @ts-ignore
-    const [stage, dd_access_token, dd_secret] = process.argv.slice(2);
+    const [stage, dd_access_token, dd_secret, message] = process.argv.slice(2);
+
     if (!stage || !dd_access_token || !dd_secret) {
         return;
     }
+
     const config = getConfig();
+
     // 钉钉机器人群通知
-    const ddrobot = new Robot({
-        // @ts-ignore
+    const ddIns = new Robot({
+        baseUrl: 'https://oapi.dingtalk.com/robot/send',
         accessToken: dd_access_token,
-        // @ts-ignore
-        secret: dd_secret,
+        secret: dd_secret
     });
+
     const stageMap = {
         test: '提测',
         deploy: '发布',
         deploy_rc: '灰度',
     };
+
     const markdownTitle = `${config.name}`.toUpperCase() + '：' + stageMap[stage];
     // @ts-ignore
-    const markdown = new Robot.Markdown()
+    const content = new Markdown()
         .setTitle(markdownTitle)
         .add(`[${markdownTitle}](${config.git || ""})\n`)
         .add(`1. version：${config.version}`)
-        .add(`2. description：${config.description}`);
+        .add(`2. description：${config.description}`)
+    if (message) {
+        content.add(`> git：${message}`);
+    }
     // @ts-ignore
-    ddrobot.send(markdown);
+    ddIns.markdown(content.title, content.text).then(() => {
+        console.log(chalk.green(`已发送钉钉通知!`));
+    });
 }
 
 export default notice;
