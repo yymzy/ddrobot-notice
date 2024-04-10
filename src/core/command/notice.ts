@@ -80,10 +80,7 @@ async function notice() {
         .setTitle(markdownTitle)
         .add(`[${markdownTitle}](${config.git || ""})\n`)
         .add(`1. version：${config.version}`)
-        .add(`2. description：${config.description}`)
-    if (message) {
-        content.add(`> git：${message}`);
-    }
+        .add(`2. description：${message}【${config.description}】`)
     // @ts-ignore
     ddIns.markdown(content.title, content.text).then(() => {
         console.log(chalk.green(`已发送钉钉通知!`));
